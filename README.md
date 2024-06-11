@@ -7,7 +7,8 @@
 - OpenAI APIを用いた問題の自動生成
 
 ## システム構成図
-![システム構成図_frontend](https://github.com/kazuhiro-ogawa/az-104-react-app/assets/105719508/183b23b0-d37a-4413-928a-1ca2219a3cb9)
+![react](https://github.com/kazuhiro-ogawa/az-104-react-app/assets/105719508/533186a1-230a-43c0-bbb8-4e3c834cb776)
+
 
 ## Azure Functions
 問題取得用のAzure Functions(https://github.com/kazuhiro-ogawa/az-104-app-getQuestions.git)  
