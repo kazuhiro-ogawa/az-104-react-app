@@ -1,15 +1,21 @@
-// QuizScreen.tsx
+import React from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import ImageComponent from './ImageComponent';
 
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import ImageComponent from './ImageComponent'; 
+interface QuizData {
+  questions: any[]; // 適切に型を定義することをおすすめします
+}
 
-const QuizScreen = () => {
-  const { mode } = useParams(); // URLからmodeパラメータを取得
-  const location = useLocation();
-  const { course } = location.state;  // `state` から `course` を取り出す
+interface QuizScreenProps {
+  quizData: QuizData;
+}
 
-  console.log("Select Course:", course);
+const QuizScreen: React.FC<QuizScreenProps> = ({ quizData }) => {
+  const { mode } = useParams<{ mode: string }>();
+  const location = useLocation() as { state: { course: string } };
+  const { course } = location.state;
+
+  console.log("Selected Course:", course);
   console.log("Quiz Mode:", mode);
 
   const testBlobName = 'テスト画像.jpg';
@@ -17,11 +23,20 @@ const QuizScreen = () => {
   return (
     <div>
       <h1>Quiz Screen</h1>
-      <p>Selected Course: {course}</p>  {/* 取り出した `course` を表示 */}
+      <p>Selected Course: {course}</p>
       <p>Quiz Mode: {mode === 'general' ? 'General Questions' : 'Generated Questions'}</p>
       <ImageComponent blobName={testBlobName} />
+      <div>
+        {/* ここでquizData.questionsを使用してクイズの問題を表示 */}
+        {quizData.questions.map((question, index) => (
+          <div key={index}>
+            <h2>{question.QuestionText}</h2>
+            {/* 他の質問の詳細を表示 */}
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default QuizScreen;

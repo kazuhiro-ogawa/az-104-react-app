@@ -1,10 +1,8 @@
-// QuizDataLoader.tsx
-
 import React, { useEffect, useState } from 'react';
 import QuizScreen from './QuizScreen';
 
 interface QuizData {
-  questions: any[]; // 問題データの型定義を適宜調整してください
+  questions: any[]; // 適切に型を定義することをおすすめします
 }
 
 interface QuizDataLoaderProps {

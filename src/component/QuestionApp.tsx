@@ -1,11 +1,35 @@
+import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+
+interface Category {
+  CategoryID: string;
+  Category: string;
+}
+
+interface Choice {
+  ChoiceID?: string;
+  ChoiceText: string;
+  IsCorrect: boolean;
+}
+
+interface Question {
+  QuestionID: string;
+  CategoryID: string;
+  QuestionText: string;
+  AnswerExplanation: string;
+  Image?: {
+    ImagePath: string;
+    Description: string;
+  };
+  Choices: Choice[];
+}
 
 const QuestionsApp = () => {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [newQuestion, setNewQuestion] = useState({
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [newQuestion, setNewQuestion] = useState<Question>({
+    QuestionID: '',
     CategoryID: '',
     QuestionText: '',
     AnswerExplanation: '',
@@ -13,10 +37,9 @@ const QuestionsApp = () => {
   });
 
   useEffect(() => {
-    // カテゴリ一覧を取得する関数
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('/api/get_categories'); // カテゴリを取得するエンドポイント
+        const response = await axios.get('/api/get_categories');
         setCategories(response.data.categories);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -26,11 +49,10 @@ const QuestionsApp = () => {
     fetchCategories();
   }, []);
 
-  const handleCategoryChange = async (event) => {
+  const handleCategoryChange = async (event: ChangeEvent<HTMLSelectElement>) => {
     const categoryId = event.target.value;
     setSelectedCategory(categoryId);
 
-    // 選択されたカテゴリIDで質問を取得する
     try {
       const response = await axios.get(`/api/manage_questions?category_id=${categoryId}`);
       setQuestions(response.data.questions);
@@ -39,12 +61,12 @@ const QuestionsApp = () => {
     }
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setNewQuestion({ ...newQuestion, [name]: value });
   };
 
-  const handleChoiceChange = (index, field, value) => {
+  const handleChoiceChange = (index: number, field: string, value: string | boolean) => {
     const updatedChoices = newQuestion.Choices.map((choice, i) => (
       i === index ? { ...choice, [field]: value } : choice
     ));
@@ -58,7 +80,7 @@ const QuestionsApp = () => {
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
       const response = await axios.post('/api/manage_questions', newQuestion);
