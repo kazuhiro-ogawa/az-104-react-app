@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/index.html"
+    }
+  ],
+  "mimeTypes": {
+    ".js": "application/javascript",
+    ".ts": "application/javascript",
+    ".tsx": "application/javascript"
+  }
+}
