@@ -1,30 +1,16 @@
-# React + TypeScript + Vite
+# AZ-104 TrainingApp（作成中）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+このアプリはAZ-104の試験に向けた知識を固めるための問題集です。各セクションにおいての問題で、繰り返すことにより知識を叩き込むことができます。
 
-Currently, two official plugins are available:
+## 機能
+- セクションに分かれた問題
+- OpenAI APIを用いた問題の自動生成
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## システム構成図
+![react](https://github.com/kazuhiro-ogawa/az-104-react-app/assets/105719508/533186a1-230a-43c0-bbb8-4e3c834cb776)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Azure Functions
+問題取得用のAzure Functions(https://github.com/kazuhiro-ogawa/az-104-app-getQuestions.git)  
+画像取得用のAzure Functions(https://github.com/kazuhiro-ogawa/az-104-app-getImage.git)  
+問題挿入用のAzure Functions(https://github.com/kazuhiro-ogawa/az-104-app-insert.git)  
