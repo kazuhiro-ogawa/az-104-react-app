@@ -2,6 +2,8 @@
 
 このアプリはAZ-104の試験に向けた知識を固めるための問題集です。各セクションにおいての問題で、繰り返すことにより知識を叩き込むことができます。
 
+URL([wonderful-desert-0998f7600.5.azurestaticapps.net](https://wonderful-desert-0998f7600.5.azurestaticapps.net/))  
+
 ## 機能
 - セクションに分かれた問題
 - OpenAI APIを用いた問題の自動生成
