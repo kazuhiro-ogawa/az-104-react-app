@@ -2,15 +2,23 @@ import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import ImageComponent from './ImageComponent';
 
-interface QuizData {
-  questions: any[]; // 適切に型を定義することをおすすめします
+interface Question {
+  questionID: number;
+  questionText: string;
+  answerExplanation: string;
+  imagePath: string;
+  choices: {
+    choiceID: number;
+    choiceText: string;
+    isCorrect: boolean;
+  }[];
 }
 
 interface QuizScreenProps {
-  quizData: QuizData;
+  questions: Question[];
 }
 
-const QuizScreen: React.FC<QuizScreenProps> = ({ quizData }) => {
+const QuizScreen: React.FC<QuizScreenProps> = ({ questions }) => {
   const { mode } = useParams<{ mode: string }>();
   const location = useLocation() as { state: { course: string } };
   const { course } = location.state;
@@ -27,10 +35,10 @@ const QuizScreen: React.FC<QuizScreenProps> = ({ quizData }) => {
       <p>Quiz Mode: {mode === 'general' ? 'General Questions' : 'Generated Questions'}</p>
       <ImageComponent blobName={testBlobName} />
       <div>
-        {/* ここでquizData.questionsを使用してクイズの問題を表示 */}
-        {quizData.questions.map((question, index) => (
+        {/* ここでquestionsを使用してクイズの問題を表示 */}
+        {questions.map((question, index) => (
           <div key={index}>
-            <h2>{question.QuestionText}</h2>
+            <h2>{question.questionText}</h2>
             {/* 他の質問の詳細を表示 */}
           </div>
         ))}
